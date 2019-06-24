@@ -3,6 +3,7 @@ import { FETCH_PRODUCTS, SEARCH_PRODUCT, LOGIN } from "./constants.js";
 const initialState = {
   fetching: false,
   data: null,
+  userinfo: {},
   error: null
 };
 
@@ -11,7 +12,7 @@ export function productsReducer(state = initialState, action) {
     case `${LOGIN}_PENDING`:
       return { ...state, fetching: true, error: null };
     case `${LOGIN}_SUCCESS`:
-      return { ...state, fetching: false, data: action.responseData };
+      return { ...state, fetching: false, userinfo: action.responseData.data };
     case `${LOGIN}_FAILURE`:
       return { ...state, fetching: false, error: action.error };
     case `${FETCH_PRODUCTS}_PENDING`:

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {
-    withRouter
-  } from "react-router-dom";
+import { LOGIN } from "../constants";
+import { connect } from "react-redux";
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -12,6 +11,16 @@ class Login extends Component {
                 password: ''
             }
         }; 
+    }
+
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
+        console.log("new login====>", nextProps)
+        if(nextProps.userinfo && nextProps.userinfo[0]) {
+            console.log("here", nextProps)
+            localStorage.setItem("isAuthenticated", "true")
+            localStorage.setItem("username", nextProps.userinfo[0].username)
+            this.props.history.replace("/store")
+        }
     }
 
     handleChange = (e) => {
@@ -48,4 +57,22 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login);
+const mapStateToProps = state => {
+    return {
+      fetching: state.fetching,
+      userinfo: state.userinfo,
+      error: state.error
+    };
+  };
+  
+const mapDispatchToProps = dispatch => {
+return {
+    login: data => dispatch({type: `${LOGIN}_PENDING`, data: data})
+};
+};
+
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(Login);
+  

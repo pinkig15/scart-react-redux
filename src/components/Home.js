@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Products from './Products';
+import { FETCH_PRODUCTS, SEARCH_PRODUCT } from "../constants";
+import { connect } from "react-redux";
 
 class Home extends Component {
     constructor(props) {
@@ -38,7 +40,7 @@ class Home extends Component {
               Something went wrong!<span>error: {error}</span>
           </p> : 
           <>
-            <Header search={(str)=> this.search(str) } logout={this.props.logout} login={this.props.login} username={this.state.username}/>
+            <Header search={(str)=> this.search(str) } logout={this.logout} login={this.props.login} username={this.state.username}/>
             <Products data={data} searchInp={searchInp}/>
             <Footer/>
           </>
@@ -46,4 +48,23 @@ class Home extends Component {
     }
 }
 
-export default Home;
+
+const mapStateToProps = state => {
+  return {
+    fetching: state.fetching,
+    data: state.data,
+    error: state.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+return {
+  fetchProducts: () => dispatch({ type: `${FETCH_PRODUCTS}_PENDING` }),
+  search: data => dispatch({ type: `${SEARCH_PRODUCT}_PENDING`, data: data })
+};
+};
+
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(Home);

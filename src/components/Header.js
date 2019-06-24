@@ -14,13 +14,18 @@ class Header extends Component {
   }
 
   logout = () => {
-    this.props.logout()
+    localStorage.removeItem("isAuthenticated")
+    localStorage.removeItem("username")
   }
 
   searchHandler = (event) => {
     this.setState({searchInp: event.target.value}, ()=> {
       this.props.search(this.state.searchInp)
     });
+  }
+
+  getUserName = () => {
+    return localStorage.getItem("username")
   }
 
     render() {
@@ -38,7 +43,7 @@ class Header extends Component {
         />
           <div className="header-right">
           <span>
-            `Welcome ${this.state.username}!` <br/>
+            {`Welcome ${this.getUserName()}!`} <br/>
             <Link to="/scart">
               <CartIcon/>
             </Link>
