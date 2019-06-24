@@ -5,7 +5,17 @@ import { FETCH_PRODUCTS, SEARCH_PRODUCT, LOGIN } from "./constants.js";
 export function* login(data) {
   const responseData = yield call(callLogin, data);
   try{
-    yield put({type: `${LOGIN}_SUCCESS`, responseData})
+    if(responseData.data.length === 0) {
+      alert("Incorrect username or password!")
+    }
+    else{
+      if(responseData.data[0].password !== data.data.password) {
+        alert("wrong password!")
+      }
+      else {
+        yield put({type: `${LOGIN}_SUCCESS`, responseData})
+      }
+    }
   }catch(error) {
     yield put({type: `${LOGIN}_FAILURE`, error})
   }

@@ -14,9 +14,7 @@ class Login extends Component {
     }
 
     UNSAFE_componentWillReceiveProps = (nextProps) => {
-        console.log("new login====>", nextProps)
-        if(nextProps.userinfo && nextProps.userinfo[0]) {
-            console.log("here", nextProps)
+            if(nextProps.userinfo && nextProps.userinfo[0]) {
             localStorage.setItem("isAuthenticated", "true")
             localStorage.setItem("username", nextProps.userinfo[0].username)
             this.props.history.replace("/store")
@@ -33,26 +31,19 @@ class Login extends Component {
         this.setState({ submitted: true });
         const { username, password } = this.state.user;
         if (username && password) {
-            this.props.login(username);
-            // this.props.history.push("/store")
+            this.props.login(this.state.user);
         }
-    }
-
-    componentDidMount = () => {
-        console.log("in login", this.props.history)
     }
 
     render() {
         const {username, password} = this.state.user;
         return (
-            <div className="login-container container">
+            <form name="login-form" onSubmit={(e) => this.handleLogin(e)} className="login-form">
                 <h2>sCart</h2>
-                <form name="login-form" onSubmit={(e) => this.handleLogin(e)}>
                 <input type="text" className="form-control" name="username" value={username} onChange={(e) => this.handleChange(e)} placeholder="Username"/>
                 <input type="password" className="form-control" name="password" value={password} onChange={(e) => this.handleChange(e)} placeholder="Password"/>
-                <button disabled={username.trim() === '' || password.trim() === ''} className="btn">Login</button>
-                </form>
-            </div>
+                <button disabled={username.trim() === '' || password.trim() === ''} className="btn btn-primary">Login</button>
+            </form>
         );
     }
 }

@@ -11,10 +11,10 @@ export function productsReducer(state = initialState, action) {
   switch (action.type) {
     case `${LOGIN}_PENDING`:
       return { ...state, fetching: true, error: null };
-    case `${LOGIN}_SUCCESS`:
+    case `${LOGIN}_SUCCESS`: 
       return { ...state, fetching: false, userinfo: action.responseData.data };
     case `${LOGIN}_FAILURE`:
-      return { ...state, fetching: false, error: action.error };
+      return { ...state, fetching: false, userinfo: null, error: action.responseData };
     case `${FETCH_PRODUCTS}_PENDING`:
       return { ...state, fetching: true, error: null };
     case `${FETCH_PRODUCTS}_SUCCESS`:

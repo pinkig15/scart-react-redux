@@ -24,35 +24,34 @@ class Header extends Component {
     });
   }
 
-  getUserName = () => {
-    return localStorage.getItem("username")
-  }
-
     render() {
-        return (
-            <header className="App-header">
-          <img className="logo-img" src={"favicon.ico"} alt="logo"/>
-          
-          <input
-           className="search-inpbx"
-            placeholder="Search Products"
-            type="text"
-            name="searchInp"
-            value={this.state.value}
-            onChange={this.searchHandler}
-        />
-          <div className="header-right">
-          <span>
-            {`Welcome ${this.getUserName()}!`} <br/>
-            <Link to="/scart">
-              <CartIcon/>
-            </Link>
-             1 items
-          </span>
-          <Link to="/" onClick={()=> this.logout()}><LogoutIcon /></Link>
+      const user = localStorage.getItem("username");
+      return (
+        <header className="App-header">
+          <div>
+            <img className="logo-img" src={"favicon.ico"} alt="logo"/>
+            
+          </div>
+          <div>
+            <input
+              className="search-inpbx"
+              placeholder="Search Products"
+              type="text"
+              name="searchInp"
+              value={this.state.value}
+              onChange={this.searchHandler}
+            />
+            <span>
+              <span className="cart-logo">
+              {`Welcome ${user}!`}
+                <span><Link to="/scart"><CartIcon/></Link>1 items</span>
+              </span>
+              <span><Link to="/" onClick={()=> this.logout()}><LogoutIcon /></Link></span>
+            </span>
+            
           </div>
         </header>
-        );
+      );
     }
 }
 

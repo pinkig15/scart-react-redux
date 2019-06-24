@@ -108,18 +108,22 @@ class Products extends Component {
                         <img alt={"test_img"} src={item.image} />
                         <div className="product-detail">
                             <b> {item.title}</b>
-                            <div className="after-img-div">
                             <div className="color-span">
-                                color
+                               <div>
+                               <span>Color:</span>
                                 <svg width="20" height="20">
+                                <label></label>
                                     <rect x="10" y="10" width="10" height="20" stroke="black" fill={item.colour.color} strokeWidth="1"/>
                                 </svg>
+                               </div>
+                                <span className="plus">+</span>
                             </div>
-                        </div>
-                        <div className="add-div">{`Brand: ${item.brand}`} <span className="plus">+</span></div>
+                        <div className="add-div">{`Brand: ${item.brand}`}</div>
                         <span>{`Rating: ${item.rating}`}</span>
-                        <span> {`Price: $${parseInt(item.price.final_price  / 69.52)}`}</span>
-                        <span> {`Discount: ${item.discount}`}</span>
+                        <div className="price-detail">
+                          <span> {`Price: $${parseInt(item.price.final_price  / 69.52)}`}</span>
+                          <span> {`Discount: ${item.discount}`}</span>
+                        </div>
                         </div>
                     </div>
                 )}</main> : 

@@ -19,7 +19,7 @@ const callSearchProduct = ({ data }) => {
 const callLogin = ({data}) => {
   return axios({
     method: GET,
-    url: "https://xebiascart.herokuapp.com/users?username="+ data,
+    url: "https://xebiascart.herokuapp.com/users?username="+ data.username,
   })
 }
 
