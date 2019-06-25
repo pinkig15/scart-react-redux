@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LogoutIcon, CartIcon } from '../constants.js';
 
 
@@ -44,7 +44,7 @@ class Header extends Component {
             <span>
               <span className="cart-logo">
               {`Welcome ${user}!`}
-                <span><Link to="/scart"><CartIcon/></Link>1 items</span>
+                <span><Link to="/scart"><CartIcon/></Link>0 item</span>
               </span>
               <span><Link to="/" onClick={()=> this.logout()}><LogoutIcon /></Link></span>
             </span>

@@ -21,9 +21,6 @@ class App extends Component {
   }
 
   render() {
-
-    const { data, isAuthenticated} = this.state;
-
     const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
       <Route { ...rest } render={props => (
         localStorage.getItem("isAuthenticated") === "true" ? (

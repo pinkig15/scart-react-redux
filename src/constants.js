@@ -4,6 +4,7 @@ import {data} from './data.json'
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 export const LOGIN = "LOGIN";
+export const FETCH_FILTER_DATA = "FETCH_FILTER_DATA";
 
 export const products = data;
 

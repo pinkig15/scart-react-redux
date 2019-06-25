@@ -40,6 +40,7 @@ class Login extends Component {
         return (
             <form name="login-form" onSubmit={(e) => this.handleLogin(e)} className="login-form">
                 <h2>sCart</h2>
+                {!this.props.fetching ? <div className="error-msg">{this.props.error}</div> : ""}
                 <input type="text" className="form-control" name="username" value={username} onChange={(e) => this.handleChange(e)} placeholder="Username"/>
                 <input type="password" className="form-control" name="password" value={password} onChange={(e) => this.handleChange(e)} placeholder="Password"/>
                 <button disabled={username.trim() === '' || password.trim() === ''} className="btn btn-primary">Login</button>

@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
 
 class Cart extends Component {
-
-    constructor(props) {
-        super(props)
-        this.setState = {
-            newArr:this.props.newArr
-        }
-    }
-
-    UNSAFE_componentWillReceiveProps = (nextProps) => {
-        // this.setState({newArr: nextProps.newArr})
-        
-        }
+    // constructor(props) {
+    //     super(props)
+    //     this.setState = {
+    //         cartData: this.props.cartData || []
+    //     }
+    // }
 
     render() {
-        var newArr = this.props.newArr;
         return (
             <div className="no-result">Cart is Empty!</div>
-              
-            
         );
     }
 }

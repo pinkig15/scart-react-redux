@@ -23,4 +23,11 @@ const callLogin = ({data}) => {
   })
 }
 
-export { callFetchProducts, callSearchProduct, callLogin };
+const fetchFilterData = () => {
+  return axios({
+    method: GET,
+    url: "https://xebiascart.herokuapp.com/filters"
+  });
+}
+
+export { callFetchProducts, callSearchProduct, callLogin, fetchFilterData };

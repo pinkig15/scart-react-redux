@@ -164,9 +164,19 @@ header input {
   height: 100%;
 }
 
+.error-msg {
+  color: #f00;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
 aside.filter {
   min-width: calc(30% - 20px);
   border-bottom: #f9f9f9;
+}
+
+aside.filter input{
+  margin-right: 10px;
 }
 
 .product-container {
