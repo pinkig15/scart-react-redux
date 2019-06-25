@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ResetIcon } from '../constants';
+import Product from './Product';
+import Loader from './Loader';
 
-class Products extends Component {
+class ProductsList extends Component {
 
     constructor(props) {
         super(props)
@@ -10,12 +12,13 @@ class Products extends Component {
             newArr: [],
             selectedColor: [],
             selectedBrand: [],
-            searchInp: this.props.searchInp
+            searchInp: this.props.searchInp,
+            fetching: this.props.fetching,
         }
     }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
-      this.setState({data: nextProps.data, newArr: nextProps.data, searchInp: nextProps.searchInp})
+      this.setState({data: nextProps.data, newArr: nextProps.data, searchInp: nextProps.searchInp, fetching: nextProps.fetching})
       
     }
 
@@ -76,7 +79,8 @@ class Products extends Component {
        const {newArr} = this.state;
         return (
             <div className="main-container">
-            <aside className="filter">
+            {!this.state.fetching ? <>
+              <aside className="filter">
               <div className="filter-title">
                   <span>Filter</span> <span onClick={()=> this.resetFilter()}>
                     <ResetIcon />
@@ -104,34 +108,14 @@ class Products extends Component {
             {newArr && newArr.length > 0 ? 
                 <main className="product-container">{newArr.map(
                 item =>
-                this.showItem(item.title) && <div key={item.id}>
-                        <img alt={"test_img"} src={item.image} />
-                        <div className="product-detail">
-                            <b> {item.title}</b>
-                            <div className="color-span">
-                               <div>
-                               <span>Color:</span>
-                                <svg width="20" height="20">
-                                <label></label>
-                                    <rect x="10" y="10" width="10" height="20" stroke="black" fill={item.colour.color} strokeWidth="1"/>
-                                </svg>
-                               </div>
-                                <span className="plus">+</span>
-                            </div>
-                        <div className="add-div">{`Brand: ${item.brand}`}</div>
-                        <span>{`Rating: ${item.rating}`}</span>
-                        <div className="price-detail">
-                          <span> {`Price: $${parseInt(item.price.final_price  / 69.52)}`}</span>
-                          <span> {`Discount: ${item.discount}`}</span>
-                        </div>
-                        </div>
-                    </div>
+                this.showItem(item.title) && <Product item={item} />
                 )}</main> : 
                 <div className="no-result">No Result Found!</div>
             }
+            </> : <Loader />}
             </div>
         );
     }
 }
 
-export default Products;
+export default ProductsList;

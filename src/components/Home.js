@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Products from './Products';
+import ProductsList from './ProductsList';
 import { FETCH_PRODUCTS, SEARCH_PRODUCT } from "../constants";
 import { connect } from "react-redux";
 
@@ -41,7 +41,7 @@ class Home extends Component {
           </p> : 
           <>
             <Header search={(str)=> this.search(str) } logout={this.logout} login={this.props.login} username={this.state.username}/>
-            <Products data={data} searchInp={searchInp}/>
+            <ProductsList data={data} searchInp={searchInp} fetching={this.props.fetching}/>
             <Footer/>
           </>
         );
