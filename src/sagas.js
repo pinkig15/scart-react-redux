@@ -31,9 +31,9 @@ export function* callFilterData() {
   try {
     const response = yield call(fetchFilterData);
     const responseData = response.data;
-    yield put({ type: `${FETCH_PRODUCTS}_SUCCESS`, responseData });
+    yield put({ type: `${FETCH_FILTER_DATA}_SUCCESS`, responseData });
   } catch (error) {
-    yield put({ type: `${FETCH_PRODUCTS}_FAILURE`, error });
+    yield put({ type: `${FETCH_FILTER_DATA}_FAILURE`, error });
   }
 }
 

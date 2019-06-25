@@ -44,7 +44,7 @@ footer {
   justify-content: center;
   color: #000;
   font-weight: bold;
-  display: flex;
+  display: flex !important;
   align-items: center;
 }
 
@@ -425,6 +425,28 @@ background-color: #ccc;
   .search-inpbx {
     max-width: 200px;
   }
+
+  aside.filter {
+    border-bottom: 5px solid #dfe8f1 !important;
+    margin: 0 10px; 
+    padding: 10px;
+    align-items: baseline;
+    justify-content: space-around;
+  }
+
+  header > div:last-child {
+    width: 65%;
+  }
+
+  .filter-title {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  aside.filter > .filter-title {
+    border-bottom-style: none;
+  }
+
   .main-container {
     flex-direction: column;
   }
@@ -445,7 +467,6 @@ background-color: #ccc;
 }
 
 .product-container img {
-  width: 150px;
   height: 120px;
 }
 
@@ -455,5 +476,6 @@ background-color: #ccc;
   }
   .brand-span-filter {
     max-height: 100px;
+    max-width: 150px;
   }
 }

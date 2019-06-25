@@ -57,7 +57,7 @@ class ProductsList extends Component {
       return (
         <div className="main-container">
           {!this.props.fetching ? <>
-          <ProductFilter filterData={filterData}/>
+          <ProductFilter filterData={filterData} data={data}/>
           {data && data.length > 0 ? 
               <main className="product-container">
                 {data.map(item => this.showProduct(item.title) && <Product key={item.id} item={item} />)}

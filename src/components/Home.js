@@ -33,7 +33,7 @@ class Home extends Component {
       }
 
       componentDidMount() {
-        // this.props.fetchFilterData()
+        this.props.fetchFilterData()
         this.props.fetchProducts();
       }
     render() {

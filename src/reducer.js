@@ -27,7 +27,7 @@ export function productsReducer(state = initialState, action) {
     case `${FETCH_FILTER_DATA}_PENDING`:
       return { ...state, filterFetching: true, filterError: null };
     case `${FETCH_FILTER_DATA}_SUCCESS`:
-      return { ...state, data: state.data, filterFetching: false, filterData: action.responseData };
+      return { ...state, filterFetching: false, filterData: action.responseData };
     case `${FETCH_FILTER_DATA}_FAILURE`:
       return { ...state, filterFetching: false, filterError: "something went wrong!" };
     case `${SEARCH_PRODUCT}_PENDING`:
