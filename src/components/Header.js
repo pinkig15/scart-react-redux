@@ -13,11 +13,6 @@ class Header extends Component {
     }
   }
 
-  logout = () => {
-    localStorage.removeItem("isAuthenticated")
-    localStorage.removeItem("username")
-  }
-
   searchHandler = (event) => {
     this.setState({searchInp: event.target.value}, ()=> {
       this.props.search(this.state.searchInp)
@@ -46,7 +41,7 @@ class Header extends Component {
               {`Welcome ${user}!`}
                 <span><Link to="/scart"><CartIcon/></Link>0 item</span>
               </span>
-              <span><Link to="/" onClick={()=> this.logout()}><LogoutIcon /></Link></span>
+              <span><Link to="/" onClick={()=> this.props.logout()}><LogoutIcon /></Link></span>
             </span>
             
           </div>

@@ -5,24 +5,14 @@ class ProductFilter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          data: {},
-          filterData: [],
-          filteredData: [],
-          colorsData: {},
-          brandsData: {},
-          pricesData: {}
+          data: this.props.data,
+          filterData: this.props.filterData,
+          filteredData: []
         }
     }
 
-    componentWillReceiveProps = (nextProps) => {
-        this.setState({filterData: nextProps.filterData}, ()=> {
-          const {filterData} = this.state;
-          this.setState({
-            colorsData: this.getFilterSubData(filterData, "COLOUR"),
-            brandsData: this.getFilterSubData(filterData, "BRAND"), 
-            pricesData: this.getFilterSubData(filterData, "PRICE")
-          })
-        })
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
+        this.setState({filterData: nextProps.filterData, data: nextProps.data})
     }
 
     getFilterSubData = (filterData, type) => (
@@ -37,18 +27,24 @@ class ProductFilter extends Component {
         var newArr1, newArr2;
         if(type === "color") {
           newArr1 = this.state.data.filter(item => item.colour.color === value)
-          this.setState({filteredData: newArr1})
+          this.setState({filteredData: newArr1}, () => {
+            this.props.getFilteredProducts(this.state.filteredData)
+          })
         }
         else if(type === "brand"){
-          newArr2 = this.state.data.filter(item => item.brand === value)
-          this.setState({filteredData: newArr2})
+          newArr2 = this.state.data.filter(item => item.brand.value === value)
+          this.setState({filteredData: newArr2}, () => {
+            this.props.getFilteredProducts(this.state.filteredData)
+          })
         }
       }
     
     render() {
-        // const colors = ["#00AF33", "#33A1DE", "#FFD700", "#292421", "#B87333", "#5C3317", "#8C7853", "#800000", "#900020", "#F0E68C", "#787878", "#F5F5DC"];
-        // const brands = ["peter england pe", "znopy", "gowell", "twin", "holysin", "foxzy", "finery", "scarpia", "adreno", "black macy", "marathon", "trv", "fine arch", "kaption", "north star", "blue tag", "mbh", "elano", "globia", "rohyt", "opner", "bond street", "wave walk", "fly india", "zekonis", "action campus", "toms", "united colors of benetton", "columbus", "axter", "baaz", "devoir", "fuzone amco", "cougar", "roony", "montiano", "kwellin", "camro", "dream like", "lockey"]
-       const {colorsData, brandsData} = this.state;
+      const {filterData} = this.props;
+      const colorsData = filterData && this.getFilterSubData(filterData, 'COLOUR');
+      const brandsData = filterData && this.getFilterSubData(filterData, 'BRAND');
+      const pricesData = filterData && this.getFilterSubData(filterData, 'PRICE')
+      
         return (
             <aside className="filter">
               <div className="filter-title">
@@ -58,22 +54,32 @@ class ProductFilter extends Component {
               </div>
               <b>Color</b>
               <div className="color-span-filter">
-                  <>
+                <>
                   {colorsData && colorsData.values && colorsData.values.map((item, index) =>
-                  <svg onClick={()=> this.filterData(item, "color")} key={index} width="30" height="30">
+                  <svg onClick={()=> this.getFilteredData(item.color, "color")} key={index} width="30" height="30">
                       <rect x="10" y="10" width="30" height="30" stroke="black" fill={item.color} strokeWidth="1"></rect>
                   </svg>
                   )}
-                  </>
+                </>
               </div><b>Brand</b>
               <div className="brand-span-filter">
               {brandsData && brandsData.values && brandsData.values.map((item, index) =>
               <div key={index}>
-                  <input type="checkbox" onChange={() => this.getFilteredData(item, "brand")}></input>
+                  <input type="checkbox" onChange={() => this.getFilteredData(item.value, "brand")}></input>
                   <span>{item.value}</span>
               </div>
               )}
               </div>
+              <b>Price</b>
+              {pricesData && pricesData.values && pricesData.values.length > 0 &&
+              <div className="price-container">
+                <select>
+                  {pricesData.values.map(item => <option key={item.key} value={item.displayValue}>{item.displayValue}</option>)}
+                </select>
+                <select>
+                  {pricesData.values.map(item => <option key={item.key} value={item.displayValue}>{item.displayValue}</option>)}
+                </select>
+              </div>}
             </aside>
         );
     }

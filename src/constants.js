@@ -1,12 +1,9 @@
 // action types
 import React from 'react'
-import {data} from './data.json'
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 export const LOGIN = "LOGIN";
 export const FETCH_FILTER_DATA = "FETCH_FILTER_DATA";
-
-export const products = data;
 
 export const CartIcon = () => (
 <svg x="0px" y="0px" width="16" height="16" viewBox="0 0 64 64" enableBackground="new 0 0 64 64">

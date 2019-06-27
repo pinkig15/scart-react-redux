@@ -51,13 +51,17 @@ class ProductsList extends Component {
     }
     return flag
   }
+
+  getFilteredProducts = (filteredData) => {
+    this.setState({data: filteredData})
+  }
    
   render() {
       const {filterData, data} = this.state
       return (
         <div className="main-container">
           {!this.props.fetching ? <>
-          <ProductFilter filterData={filterData} data={data}/>
+          <ProductFilter filterData={filterData} data={data} getFilteredProducts={() => this.getFilteredProducts}/>
           {data && data.length > 0 ? 
               <main className="product-container">
                 {data.map(item => this.showProduct(item.title) && <Product key={item.id} item={item} />)}

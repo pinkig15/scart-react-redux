@@ -23,7 +23,6 @@ class Home extends Component {
       UNSAFE_componentWillReceiveProps = (nextProps) => {
         const {data, filterData, fetching} = nextProps;
         this.setState({data, filterData, fetching})
-        
       }
 
       search = (str) => {
@@ -36,11 +35,18 @@ class Home extends Component {
         this.props.fetchFilterData()
         this.props.fetchProducts();
       }
-    render() {
+
+      logout = () => {
+          localStorage.removeItem("username")
+          localStorage.removeItem("isAuthenticated")
+          this.props.updateAuth()
+      }
+
+      render() {
         const { searchInp, fetching, data, error, filterData, filterError, filterFetching } = this.state;
         return (
           <>
-            <Header search={(str)=> this.search(str) } logout={this.logout} login={this.props.login} username={this.state.username}/>
+            <Header search={(str)=> this.search(str) } logout={() => this.logout()} login={this.props.login} username={this.state.username}/>
             <ProductsList 
               searchInp={searchInp} 
               data={data} 
